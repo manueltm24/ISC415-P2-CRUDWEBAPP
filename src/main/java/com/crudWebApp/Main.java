@@ -18,6 +18,8 @@ import static spark.Spark.*;
  */
 public class Main {
     public static void main(String[] args) {
+
+         staticFileLocation("/public");
         ArrayList<Estudiante> listadoEstudiantesMain = new ArrayList<Estudiante>();
         listadoEstudiantesMain.add(new Estudiante(20120467,"MANUEL","TOLENTINO","8096085057"));
         listadoEstudiantesMain.add(new Estudiante(20131234 ,"DARLENYS","GOMEZ","8091234567"));
@@ -37,7 +39,7 @@ public class Main {
 
         get("/agregarEstudiante", (request,response)-> {
             Map<String, Object> attributes = new HashMap<>();
-
+            attributes.put("estudiantes", Estudiante.getListadoEstudiantes());
             return new ModelAndView(attributes, "/agregarEstudiante.ftl");
         }, freeMarkerEngine );
 
